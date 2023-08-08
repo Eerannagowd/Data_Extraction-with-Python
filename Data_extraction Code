@@ -1,0 +1,77 @@
+import pandas as pd
+import requests
+from bs4 import BeautifulSoup
+import nltk
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize, sent_tokenize
+negative_score = 0  # Assign a default value to the variable
+# Your code continues here...
+positive_score = 0
+polarity_score = 0
+subjectivity_score = 0
+avg_sentence_length = 0
+percentage_complex_words = 0
+fog_index = 0
+avg_words_per_sentence = 0
+complex_word_count = 0
+word_count = 0
+syllables_per_word = 0
+personal_pronouns = 0
+
+input_file = 'input.xlsx'
+df = pd.read_excel(input_file)
+
+def extract_article_text(url):
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    # Use appropriate HTML tags and attributes to extract the article text
+    article_text = ...
+    return article_text
+for index, row in df.iterrows():
+    url_id = row['URL_ID']
+    url = row['URL']
+    article_text = extract_article_text(url)
+    text_file = str(url_id) + ".txt"
+    with open(text_file, 'w') as f:
+        f.write(article_text)
+output_file = 'Output Data Structure.xlsx'
+output_df = pd.read_excel(output_file)
+
+def positive_score(text):
+    # Compute the positive score using your defined method
+    score = ...
+    return score
+
+# Define similar functions for other variables
+# ...
+
+def avg_word_length(text):
+    words = word_tokenize(text)
+    total_length = sum(len(word) for word in words)
+    avg_length = total_length / len(words)
+    return avg_length
+
+for index, row in df.iterrows():
+    url_id = row['URL_ID']
+    text_file = str(url_id) + ".txt"
+    with open(text_file, 'r') as f:
+        article_text = f.read()
+
+    output_row = {'URL_ID': url_id}
+
+    # Perform text analysis and compute the variables
+    output_row['POSITIVE SCORE'] = positive_score(article_text)
+    output_row['NEGATIVE SCORE'] = negative_score(article_text)
+    output_row['POLARITY SCORE'] = polarity_score(article_text)
+    output_row['SUBJECTIVITY SCORE'] = subjectivity_score(article_text)
+    output_row['AVG SENTENCE LENGTH'] = avg_sentence_length(article_text)
+    output_row['PERCENTAGE OF COMPLEX WORDS'] = percentage_complex_words(article_text)
+    output_row['FOG INDEX'] = fog_index(article_text)
+    output_row['AVG NUMBER OF WORDS PER SENTENCE'] = avg_words_per_sentence(article_text)
+    output_row['COMPLEX WORD COUNT'] = complex_word_count(article_text)
+    output_row['WORD COUNT'] = word_count(article_text)
+    output_row['SYLLABLE PER WORD'] = syllables_per_word(article_text)
+    output_row['PERSONAL PRONOUNS'] = personal_pronouns(article_text)
+    output_row['AVG WORD LENGTH'] = avg = avg_word_length(article_text)
+
+
